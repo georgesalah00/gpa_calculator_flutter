@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gpa_calculator_flutter/core/helpers/screen_spacing.dart';
 import 'package:gpa_calculator_flutter/core/routes/routes.dart';
+import 'package:gpa_calculator_flutter/core/theming/decorations.dart';
 import 'package:gpa_calculator_flutter/core/theming/styles.dart';
 import '../../core/helpers/extenstions.dart';
 
@@ -13,7 +14,7 @@ class WelcomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.red.shade800,
       appBar: _appBarContent(),
-      body: _bodyContentDecoration(child: _bodyContent(context)),
+      body: Decorations.bodyContentDecoration(_bodyContent(context)),
     );
   }
 
@@ -24,21 +25,6 @@ class WelcomeScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         bottomOpacity: 0,
         elevation: 0,
-      );
-
-  Container _bodyContentDecoration({required Widget child}) => Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Colors.red.shade800,
-              Colors.red.shade500,
-              Colors.orange.shade900
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: child,
       );
 
   Widget _bodyContent(BuildContext ctx) => Column(
@@ -81,13 +67,7 @@ class WelcomeScreen extends StatelessWidget {
                 onPressed: () {
                   ctx.pushReplacementNamed(ctx, Routes.calculatingScreen);
                 },
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.r)),
-                  backgroundColor: Colors.orangeAccent.shade700,
-                  elevation: 5,
-                  padding: EdgeInsets.symmetric(vertical: 10.h),
-                ),
+                style: Decorations.orangeButtonStyle(),
                 child: Text('Get Started', style: Styles.font20White),
               ),
             )
