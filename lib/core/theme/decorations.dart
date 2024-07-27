@@ -24,15 +24,17 @@ class Decorations {
         padding: EdgeInsets.symmetric(vertical: 10.h),
       );
 
-  static Widget dialogDecoration({required Widget child, required double height, required double radius}) => Container(
-      height: height.h,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(radius.r),
-          topRight: Radius.circular(radius.r),
-        ),
-      ),
-      child: child);
+  static Widget dialogDecoration(
+          {required Widget child, double? height, required double radius}) =>
+      Container(
+          height: height != null ? height.h : 0.0,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(radius.r),
+              topRight: Radius.circular(radius.r),
+            ),
+          ),
+          child: child);
 }

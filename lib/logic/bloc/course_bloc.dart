@@ -11,6 +11,7 @@ class CourseBloc extends Bloc<CourseEvent, CourseState> {
   final GpaRepository gR;
   CourseBloc(this.gR) : super(CourseInitial()) {
     on<AddCourse>(_handleAddCourse);
+    on<ClaculateGPA>(_handleCalculateGPA);
   }
 
   void _handleAddCourse(AddCourse event, Emitter<CourseState> emit) {
@@ -18,5 +19,12 @@ class CourseBloc extends Bloc<CourseEvent, CourseState> {
         Course(name: event.name, credits: event.credits, grade: event.grade);
     gR.addCourse(course);
     emit(AddedCourse(courses: gR.courses));
+  }
+
+  void _handleCalculateGPA(ClaculateGPA event, Emitter<CourseState> emit) {
+    gR.prevCredits = event.prevCredits;
+    gR.prevGPA = event.prevGPA;
+    final gpa = gR.totalGPA;
+    emit(GPACalculated(gpa: gpa));
   }
 }

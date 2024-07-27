@@ -4,7 +4,6 @@ import 'package:gpa_calculator_flutter/data/models/course.dart';
 
 class GpaRepository {
   List<Course> _courses = [];
-  List<double> _coursesGPA = [];
   int _prevCredits = 0;
   double _prevGPA = 0.0;
 
@@ -39,20 +38,13 @@ class GpaRepository {
   }
 
   void addCourse(Course course) {
-    if (_courses.length <= 7) {
+    if (_courses.length < 7) {
       _courses.add(course);
     }
   }
 
-  void calculateCoursesGPa() {
-    for (var course in _courses) {
-      final double courseGPA = course.courseGPA;
-      _coursesGPA.add(courseGPA);
-    }
-  }
-
   String get totalGPA =>
-      (((_prevGPA * _prevGPA) + (_semisterCredits + semisterGPA)) /
-              (_prevCredits + _semisterTotalGPAPoints))
+      (((_prevGPA * _prevCredits) + (_semisterCredits + semisterGPA)) /
+              (_prevCredits + _semisterCredits))
           .toStringAsFixed(2);
 }

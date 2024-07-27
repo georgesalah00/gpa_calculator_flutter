@@ -11,3 +11,11 @@ class AddCourse extends CourseEvent  {
   AddCourse({required this.name, required this.credits, required this.grade});
     
 }
+
+class ClaculateGPA extends CourseEvent {
+  final int prevCredits;
+  final double prevGPA;
+
+  ClaculateGPA({required this.prevCredits, required this.prevGPA});
+  
+}

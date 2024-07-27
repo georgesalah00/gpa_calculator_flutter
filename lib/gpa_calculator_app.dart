@@ -15,7 +15,9 @@ class GpaCalculatorApp extends StatelessWidget {
       splitScreenMode: true,
       child: MaterialApp(
         title: 'GPA Calculator',
-        // theme: ThemeData(),
+        theme: ThemeData(
+          primaryColor: Colors.red.shade800,
+        ),
         initialRoute: Routes.welcomeScreen,
         onGenerateRoute: appRouter.onGenerateRoute,
       ),

@@ -5,6 +5,8 @@ import 'package:gpa_calculator_flutter/core/helpers/screen_spacing.dart';
 import 'package:gpa_calculator_flutter/core/theme/decorations.dart';
 import 'package:gpa_calculator_flutter/core/theme/styles.dart';
 import 'package:gpa_calculator_flutter/logic/bloc/course_bloc.dart';
+import 'package:gpa_calculator_flutter/presentation/widgets/course_form.dart';
+import 'package:gpa_calculator_flutter/presentation/widgets/course_tile.dart';
 
 class CalculatingScreen extends StatelessWidget {
   const CalculatingScreen({super.key});
@@ -12,25 +14,66 @@ class CalculatingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: BlocBuilder<CourseBloc, CourseState>(
-          builder: (context, state) {
-            return Decorations.bodyContentDecoration(Column(
-              children: [
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
-                  child: Text(
-                    'Please complete this form to calculate your GPA',
-                    style: Styles.font16WhiteBold,
+      body: Container(
+        color: Colors.red.shade800,
+        child: SafeArea(
+          child: BlocBuilder<CourseBloc, CourseState>(
+            builder: (context, state) {
+              return Column(
+                children: [
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
+                    child: Text(
+                      'Please complete this form to calculate your GPA',
+                      style: Styles.font16WhiteBold,
+                    ),
                   ),
-                ),
-                ScreenSpacing.verticalSpacing(30),
-                Decorations.dialogDecoration(
-                    child: Container(), height: 550, radius: 70),
-              ],
-            ));
-          },
+                  ScreenSpacing.verticalSpacing(30),
+                  Expanded(
+                    child: Decorations.dialogDecoration(
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              top: 40.h, left: 20.w, right: 20.w),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const CourseForm(),
+                              ScreenSpacing.verticalSpacing(20),
+                              if (state.courses != null)
+                                Expanded(
+                                  child: ListView.builder(
+                                    itemCount: state.courses!.length,
+                                    itemBuilder: (context, index) => CourseTile(
+                                      course: state.courses![index],
+                                    ),
+                                  ),
+                                ),
+                              ScreenSpacing.verticalSpacing(10),
+                              Container(
+                                width: 250.w,
+                                padding: EdgeInsets.symmetric(vertical: 10.h),
+                                child: ElevatedButton(
+                                  onPressed: state.courses != null ? () {} : (){
+                                    // TODO: continue from here
+                                    // context.read<CourseBloc>().add(ClaculateGPA());
+                                  },
+                                  style: Decorations.orangeButtonStyle(),
+                                  child: Text(
+                                    'Calculate GPA',
+                                    style: Styles.font16WhiteBold,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        radius: 70),
+                  ),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
