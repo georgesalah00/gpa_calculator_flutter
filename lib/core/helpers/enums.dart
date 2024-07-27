@@ -17,6 +17,4 @@ enum GPAGrade{
   final String name;
 
   const GPAGrade(this.gpa, this.name);
-
-   
 }

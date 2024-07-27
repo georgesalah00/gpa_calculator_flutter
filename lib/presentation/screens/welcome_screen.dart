@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gpa_calculator_flutter/core/helpers/screen_spacing.dart';
 import 'package:gpa_calculator_flutter/core/routes/routes.dart';
-import 'package:gpa_calculator_flutter/core/theming/decorations.dart';
-import 'package:gpa_calculator_flutter/core/theming/styles.dart';
-import '../../core/helpers/extenstions.dart';
+import 'package:gpa_calculator_flutter/core/theme/decorations.dart';
+import 'package:gpa_calculator_flutter/core/theme/styles.dart';
+import '../../core/helpers/extensions.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -31,21 +31,11 @@ class WelcomeScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.asset('assets/images/welcome_screen.png'),
-          _dialogDecoration(child: _dialogContent(ctx))
+          Decorations.dialogDecoration(child: _dialogContent(ctx), height:  250, radius: 70)
         ],
       );
 
-  Container _dialogDecoration({required Widget child}) => Container(
-      height: 250.h,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(100.r),
-          topRight: Radius.circular(100.r),
-        ),
-      ),
-      child: child);
+
 
   Widget _dialogContent(BuildContext ctx) => Padding(
         padding: EdgeInsets.symmetric(horizontal: 35.w, vertical: 40.h),

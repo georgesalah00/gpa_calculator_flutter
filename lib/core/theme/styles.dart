@@ -14,4 +14,6 @@ class Styles {
   );
   static TextStyle font20White =
       TextStyle(color: Colors.white, fontSize: 20.sp);
+  static TextStyle font16WhiteBold = TextStyle(
+      color: Colors.white, fontSize: 16.sp, fontWeight: FontWeight.bold);
 }
