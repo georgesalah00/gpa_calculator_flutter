@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gpa_calculator_flutter/core/helpers/screen_spacing.dart';
-import 'package:gpa_calculator_flutter/core/theme/decorations.dart';
-import 'package:gpa_calculator_flutter/core/theme/styles.dart';
-import 'package:gpa_calculator_flutter/logic/bloc/course_bloc.dart';
-import 'package:gpa_calculator_flutter/presentation/widgets/course_form.dart';
-import 'package:gpa_calculator_flutter/presentation/widgets/course_tile.dart';
+import '../../core/helpers/screen_spacing.dart';
+import '../../core/theme/decorations.dart';
+import '../../core/theme/styles.dart';
+import '../../logic/bloc/course_bloc.dart';
+import '../widgets/calculation_form.dart';
 
 class CalculatingScreen extends StatelessWidget {
   const CalculatingScreen({super.key});
@@ -35,38 +34,7 @@ class CalculatingScreen extends StatelessWidget {
                         child: Padding(
                           padding: EdgeInsets.only(
                               top: 40.h, left: 20.w, right: 20.w),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const CourseForm(),
-                              ScreenSpacing.verticalSpacing(20),
-                              if (state.courses != null)
-                                Expanded(
-                                  child: ListView.builder(
-                                    itemCount: state.courses!.length,
-                                    itemBuilder: (context, index) => CourseTile(
-                                      course: state.courses![index],
-                                    ),
-                                  ),
-                                ),
-                              ScreenSpacing.verticalSpacing(10),
-                              Container(
-                                width: 250.w,
-                                padding: EdgeInsets.symmetric(vertical: 10.h),
-                                child: ElevatedButton(
-                                  onPressed: state.courses != null ? () {} : (){
-                                    // TODO: continue from here
-                                    // context.read<CourseBloc>().add(ClaculateGPA());
-                                  },
-                                  style: Decorations.orangeButtonStyle(),
-                                  child: Text(
-                                    'Calculate GPA',
-                                    style: Styles.font16WhiteBold,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
+                          child: CalculationForm(courses: state.courses,),
                         ),
                         radius: 70),
                   ),

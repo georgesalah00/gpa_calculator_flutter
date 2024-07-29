@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Styles {
-  static TextStyle font30WhiteBold = TextStyle(
+  static TextStyle 
+  font30WhiteBold = TextStyle(
       color: Colors.white, fontSize: 30.sp, fontWeight: FontWeight.bold);
   static TextStyle font20Black = TextStyle(
     color: Colors.black,

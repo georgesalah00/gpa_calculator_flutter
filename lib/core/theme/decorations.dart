@@ -2,18 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Decorations {
-  static Container bodyContentDecoration(Widget child) => Container(
+  static Container bodyContentDecoration(
+          Widget child, double height,[ double? radius]) =>
+      Container(
+        height: height.h,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Colors.red.shade800,
-              Colors.red.shade500,
-              Colors.orange.shade900
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
+            gradient: LinearGradient(
+              colors: [
+                Colors.red.shade800,
+                Colors.red.shade500,
+                Colors.orange.shade900
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(radius ?? 0.0),
+              bottomRight: Radius.circular(radius ?? 0.0),
+            )),
         child: child,
       );
   static ButtonStyle orangeButtonStyle() => ElevatedButton.styleFrom(
@@ -37,4 +43,10 @@ class Decorations {
             ),
           ),
           child: child);
+
+  static ButtonStyle dialogButtonStyle() {
+    return TextButton.styleFrom(
+      foregroundColor: Colors.red.shade500,
+    );
+  }
 }

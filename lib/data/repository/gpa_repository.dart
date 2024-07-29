@@ -19,7 +19,7 @@ class GpaRepository {
   double get _semisterTotalGPAPoints {
     double sum = 0;
     for (var i = 0; i < _courses.length; i++) {
-      sum += _courses[i].grade.gpa;
+      sum += _courses[i].grade.gpa * _courses[i].credits;
     }
     return sum;
   }
@@ -38,13 +38,24 @@ class GpaRepository {
   }
 
   void addCourse(Course course) {
-    if (_courses.length < 7) {
+    if (_courses.length < 8) {
       _courses.add(course);
     }
   }
 
-  String get totalGPA =>
-      (((_prevGPA * _prevCredits) + (_semisterCredits + semisterGPA)) /
-              (_prevCredits + _semisterCredits))
-          .toStringAsFixed(2);
+  void deleteCourseById(String id) {
+    _courses.removeWhere((course) => course.id == id);
+  }
+
+  double get totalGPA {
+    return double.parse(
+        (((_prevGPA * _prevCredits) + (_semisterTotalGPAPoints)) /
+                (_prevCredits + _semisterCredits))
+            .toStringAsFixed(2));
+  }
+  void resetCalculation(){
+    _prevCredits = 0;
+    _prevGPA;
+    _courses.clear();
+    }
 }

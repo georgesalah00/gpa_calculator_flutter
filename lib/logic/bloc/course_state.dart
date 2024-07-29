@@ -9,11 +9,16 @@ sealed class CourseState {
 
 final class CourseInitial extends CourseState {}
 
-final class AddedCourse extends CourseState{
-  
+final class AddedCourse extends CourseState {
   const AddedCourse({required super.courses});
 }
-final class GPACalculated extends CourseState{
-  final String gpa;
-  const GPACalculated({required this.gpa});
+
+final class DeletedCourse extends CourseState {
+  const DeletedCourse({required super.courses});
+}
+
+final class GPACalculated extends CourseState {
+  final double gpa;
+  final double semisterGpa;
+  const GPACalculated({required this.semisterGpa, required this.gpa, required super.courses});
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gpa_calculator_flutter/core/routes/app_router.dart';
-import 'package:gpa_calculator_flutter/core/routes/routes.dart';
+
+import 'core/routes/app_router.dart';
+import 'core/routes/routes.dart';
 
 class GpaCalculatorApp extends StatelessWidget {
   final AppRouter appRouter;
@@ -13,7 +14,7 @@ class GpaCalculatorApp extends StatelessWidget {
       designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
-      child: MaterialApp(
+      builder: (_, child) => MaterialApp(
         title: 'GPA Calculator',
         theme: ThemeData(
           primaryColor: Colors.red.shade800,

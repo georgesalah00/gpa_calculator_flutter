@@ -19,3 +19,13 @@ class ClaculateGPA extends CourseEvent {
   ClaculateGPA({required this.prevCredits, required this.prevGPA});
   
 }
+
+class DeleteCourse extends CourseEvent{
+  final String id;
+
+  DeleteCourse({required this.id});
+  
+}
+
+
+class ResetCalculation extends CourseEvent {}

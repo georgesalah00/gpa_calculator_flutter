@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gpa_calculator_flutter/core/routes/routes.dart';
-import 'package:gpa_calculator_flutter/data/repository/gpa_repository.dart';
-import 'package:gpa_calculator_flutter/logic/bloc/course_bloc.dart';
-import 'package:gpa_calculator_flutter/presentation/screens/calculating_screen.dart';
-import 'package:gpa_calculator_flutter/presentation/screens/welcome_screen.dart';
+import 'routes.dart';
+import '../../data/repository/gpa_repository.dart';
+import '../../logic/bloc/course_bloc.dart';
+import '../../presentation/screens/calculating_screen.dart';
+import '../../presentation/screens/results_screen.dart';
+import '../../presentation/screens/welcome_screen.dart';
 
 class AppRouter {
   final GpaRepository gR = GpaRepository();
@@ -21,6 +22,17 @@ class AppRouter {
                   value: cBloc,
                   child: const CalculatingScreen(),
                 ));
+      case Routes.resultScreen:
+        return MaterialPageRoute(builder: (_) {
+          final arguments = settings.arguments as List<double>;
+          return BlocProvider.value(
+            value: cBloc,
+            child: ResultsScreen(
+              gpa: arguments[0],
+              semisterGPA: arguments[1],
+            ),
+          );
+        });
       default:
         return null;
     }
