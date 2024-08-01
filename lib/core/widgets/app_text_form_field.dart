@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gpa_calculator_flutter/core/helpers/extensions.dart';
-import 'package:gpa_calculator_flutter/core/theme/colors.dart';
+import '../helpers/extensions.dart';
+import '../theme/colors.dart';
 
 class AppTextFormField extends StatelessWidget {
   final TextEditingController controller;

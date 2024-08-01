@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gpa_calculator_flutter/core/helpers/extensions.dart';
-import 'package:gpa_calculator_flutter/core/theme/colors.dart';
+import '../helpers/extensions.dart';
+import 'colors.dart';
 
 class Decorations {
   static Container bodyContentDecoration(

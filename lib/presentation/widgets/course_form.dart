@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gpa_calculator_flutter/core/helpers/extensions.dart';
-import 'package:gpa_calculator_flutter/core/helpers/scale_size.dart';
-import 'package:gpa_calculator_flutter/core/theme/colors.dart';
+import '../../core/helpers/extensions.dart';
+import '../../core/helpers/scale_size.dart';
+import '../../core/theme/colors.dart';
 import 'package:numberpicker/numberpicker.dart';
 import '../../core/helpers/enums.dart';
 import '../../core/helpers/screen_spacing.dart';

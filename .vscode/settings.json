@@ -2,5 +2,6 @@
     "cSpell.words": [
         "screenutil",
         "semister"
-    ]
+    ],
+    "cmake.configureOnOpen": false
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gpa_calculator_flutter/core/helpers/extensions.dart';
+import 'core/helpers/extensions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/routes/app_router.dart';
 import 'core/routes/routes.dart';
