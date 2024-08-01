@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gpa_calculator_flutter/core/helpers/extensions.dart';
+import 'package:gpa_calculator_flutter/core/theme/colors.dart';
 
 class AppTextFormField extends StatelessWidget {
   final TextEditingController controller;
@@ -17,13 +19,20 @@ class AppTextFormField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: context.themeMode(context) == Brightness.dark
+                    ? DarkThemeColors.borderColor
+                    : LightThemeColors.borderColor)),
         labelText: label,
         hintText: hintText,
+        floatingLabelStyle: TextStyle(
+            color: context.themeMode(context) == Brightness.dark
+                ? DarkThemeColors.textColor
+                : LightThemeColors.textColor),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
-        filled: true,
-        fillColor: Colors.white.withOpacity(0.8),
       ),
       keyboardType: label == 'Course name'
           ? TextInputType.name

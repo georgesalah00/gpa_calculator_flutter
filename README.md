@@ -1,16 +1,27 @@
-# gpa_calculator_flutter
+# 📊 GPA Calculator
 
-A new Flutter project.
+Welcome to the **GPA Calculator**! This Flutter application is designed specifically for students of Alexandria University Faculty of Engineering to calculate their GPA using the standard grading system of the faculty.
 
-## Getting Started
+## ✨ Description
 
-This project is a starting point for a Flutter application.
+The **GPA Calculator** allows you to easily compute your GPA by entering your previous credits, previous GPA, and the details of your current courses. Simply input the course name, grade, and number of credits, then click the "Calculate GPA" button to get your results.
 
-A few resources to get you started if this is your first Flutter project:
+## 🚀 Usage
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. **Enter Previous Data**: Input your previous credits and GPA.
+2. **Add Courses**: Fill in the course name, grade, and number of credits for each of your current courses.
+3. **Calculate**: Click the "Calculate GPA" button to see your updated GPA.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+It's that simple! 🎉
+
+## 👨‍💻 Developer
+
+This application was developed by **George Salah**, a Chemical Engineer at Alexandria University and a passionate Flutter developer.
+
+## 📜 License
+
+© 2024 George Salah. All rights reserved.
+
+---
+
+Enjoy using the **GPA Calculator** and ace your grades! 🎓✨

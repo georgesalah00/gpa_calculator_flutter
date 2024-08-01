@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gpa_calculator_flutter/core/helpers/scale_size.dart';
+import 'package:gpa_calculator_flutter/core/theme/colors.dart';
 import '../../core/helpers/extensions.dart';
 import '../../core/theme/decorations.dart';
 import '../../core/theme/styles.dart';
@@ -17,7 +19,7 @@ class CourseTile extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         ListTile(
-          titleTextStyle: Styles.font20Black,
+          titleTextStyle: Styles.font20,
           leading: Container(
             alignment: Alignment.center,
             width: 30.w,
@@ -28,12 +30,19 @@ class CourseTile extends StatelessWidget {
             ),
             child: Text(
               course.grade.name,
-              style: Styles.font16WhiteBold,
+              style: Styles.font16Bold,
+              textScaler: TextScaler.linear(ScaleSize.textScaleFactor(context)),
             ),
           ),
           subtitleTextStyle: Styles.font12grey,
-          title: Text(course.name),
-          subtitle: Text('Number of Credits: ${course.credits}'),
+          title: Text(
+            course.name,
+            textScaler: TextScaler.linear(ScaleSize.textScaleFactor(context)),
+          ),
+          subtitle: Text(
+            'Number of Credits: ${course.credits}',
+            textScaler: TextScaler.linear(ScaleSize.textScaleFactor(context)),
+          ),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -43,11 +52,11 @@ class CourseTile extends StatelessWidget {
                     context: context,
                     builder: (_) => AlertDialog(
                       title: const Text('Delete Course'),
-                      content:
-                          const Text('Are you sure you want to delete this course?'),
+                      content: const Text(
+                          'Are you sure you want to delete this course?'),
                       actions: [
                         TextButton(
-                          style: Decorations.dialogButtonStyle(),
+                          style: Decorations.buttonStyle(context),
                           onPressed: () {
                             context
                                 .read<CourseBloc>()
@@ -57,7 +66,7 @@ class CourseTile extends StatelessWidget {
                           child: const Text('Yes'),
                         ),
                         TextButton(
-                          style: Decorations.dialogButtonStyle(),
+                          style: Decorations.buttonStyle(context),
                           onPressed: () {
                             context.pop(context);
                           },
@@ -79,7 +88,9 @@ class CourseTile extends StatelessWidget {
           thickness: 1.h,
           endIndent: 60.w,
           indent: 60.w,
-          color: Colors.orange.shade400,
+          color: context.themeMode(context) == Brightness.dark
+              ? DarkThemeColors.dividerColor
+              : LightThemeColors.dividerColor,
         ),
       ],
     );
@@ -89,7 +100,7 @@ class CourseTile extends StatelessWidget {
     if (name.contains('A')) {
       return Colors.green;
     } else if (name.contains('B')) {
-      return Colors.yellow;
+      return Colors.yellow.shade600;
     } else if (name.contains('C')) {
       return Colors.orange;
     } else if (name.contains('D')) {

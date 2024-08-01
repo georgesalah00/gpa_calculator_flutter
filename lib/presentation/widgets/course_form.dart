@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gpa_calculator_flutter/core/helpers/extensions.dart';
+import 'package:gpa_calculator_flutter/core/helpers/scale_size.dart';
+import 'package:gpa_calculator_flutter/core/theme/colors.dart';
+import 'package:numberpicker/numberpicker.dart';
 import '../../core/helpers/enums.dart';
 import '../../core/helpers/screen_spacing.dart';
 import '../../core/theme/decorations.dart';
@@ -18,8 +22,7 @@ class CourseForm extends StatefulWidget {
 class _CourseFormState extends State<CourseForm> {
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _creditsController = TextEditingController();
-
+  int _credits = 1;
   final TextEditingController _nameController = TextEditingController();
 
   GPAGrade? _selectedGrade;
@@ -27,7 +30,6 @@ class _CourseFormState extends State<CourseForm> {
   @override
   void dispose() {
     _nameController.dispose();
-    _creditsController.dispose();
     super.dispose();
   }
 
@@ -54,16 +56,21 @@ class _CourseFormState extends State<CourseForm> {
                 ),
               ),
               ScreenSpacing.horizontalSpacing(10),
-              Expanded(
-                flex: 2,
-                child: AppTextFormField(
-                  controller: _creditsController,
-                  label: 'Credits',
-                  validate: _validateCreditsFormField,
+              _buildDropdownForm(context),
+              ScreenSpacing.horizontalSpacing(10),
+              Container(
+                decoration: Decorations.pickerDecorations(context),
+                child: NumberPicker(
+                  itemWidth: 50.w,
+                  itemHeight: 25.h,
+                  maxValue: 3,
+                  minValue: 1,
+                  value: _credits,
+                  onChanged: (value) => setState(() {
+                    _credits = value;
+                  }),
                 ),
               ),
-              ScreenSpacing.horizontalSpacing(10),
-              _buildDropdownForm()
             ],
           ),
           ScreenSpacing.verticalSpacing(10),
@@ -74,19 +81,19 @@ class _CourseFormState extends State<CourseForm> {
                 if (_formKey.currentState!.validate()) {
                   String name = _nameController.text;
 
-                  int credits = int.parse(_creditsController.text);
                   _nameController.clear();
-                  _creditsController.clear();
 
                   context.read<CourseBloc>().add(AddCourse(
-                      name: name, credits: credits, grade: _selectedGrade!));
+                      name: name, credits: _credits, grade: _selectedGrade!));
                 }
               },
-              style: Decorations.orangeButtonStyle(),
+              style: Decorations.buttonStyle(context),
               child: SizedBox(
                 child: Text(
                   'Add Course',
-                  style: Styles.font16WhiteBold,
+                  style: Styles.font16Bold,
+                  textScaler:
+                      TextScaler.linear(ScaleSize.textScaleFactor(context)),
                 ),
               ),
             ),
@@ -96,14 +103,30 @@ class _CourseFormState extends State<CourseForm> {
     );
   }
 
-  Expanded _buildDropdownForm() {
+  Expanded _buildDropdownForm(BuildContext ctx) {
     return Expanded(
       flex: 2,
       child: DropdownButtonFormField(
+        focusColor: ctx.themeMode(ctx) == Brightness.dark
+            ? DarkThemeColors.borderColor
+            : LightThemeColors.borderColor,
+        menuMaxHeight: 100.h,
+        elevation: 3,
         value: _selectedGrade,
         decoration: InputDecoration(
+          floatingLabelStyle: TextStyle(
+              color: ctx.themeMode(ctx) == Brightness.dark
+                  ? DarkThemeColors.textColor
+                  : LightThemeColors.textColor),
           labelText: 'Grade',
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.r)),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.r),
+              borderSide: BorderSide(
+                color: ctx.themeMode(ctx) == Brightness.dark
+                    ? DarkThemeColors.borderColor
+                    : LightThemeColors.borderColor,
+              )),
         ),
         items: const [
           DropdownMenuItem(
@@ -166,15 +189,5 @@ class _CourseFormState extends State<CourseForm> {
         },
       ),
     );
-  }
-
-  String? _validateCreditsFormField(credits) {
-    if (credits == null || credits.isEmpty) {
-      return 'Please enter the number of credits. if you haven\'t just type 0';
-    } else if (credits.contains('.')) {
-      return 'You can\'t type your credits as a decimal number . please type your credits right ';
-    }
-
-    return null;
   }
 }

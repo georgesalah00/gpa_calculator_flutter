@@ -33,7 +33,10 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
+  flutter_native_splash: ^2.4.1
   flutter_screenutil: ^5.9.3
+  numberpicker: ^2.1.2
+  shared_preferences: ^2.3.0
   syncfusion_flutter_gauges: ^26.2.5
   uuid: ^4.4.2
 
@@ -41,6 +44,14 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   flutter_test:
     sdk: flutter
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: "assets/images/welcome_screen.png"
+  color_dark: "#121212"
+  image_dark: "assets/images/welcome_screen.png"
+
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

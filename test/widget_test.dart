@@ -9,12 +9,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gpa_calculator_flutter/core/routes/app_router.dart';
 import 'package:gpa_calculator_flutter/gpa_calculator_app.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget( GpaCalculatorApp(appRouter: AppRouter()));
+    await tester.pumpWidget( GpaCalculatorApp(appRouter: AppRouter(prefs: await SharedPreferences.getInstance()), prefs: await SharedPreferences.getInstance(),));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

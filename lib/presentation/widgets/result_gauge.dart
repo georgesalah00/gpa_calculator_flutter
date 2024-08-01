@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gpa_calculator_flutter/core/helpers/scale_size.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class ResultGauge extends StatelessWidget {
@@ -42,6 +43,8 @@ class ResultGauge extends StatelessWidget {
           annotations: [
             GaugeAnnotation(
               widget: Text(
+                textScaler:
+                    TextScaler.linear(ScaleSize.textScaleFactor(context)),
                 gpa.toString(),
                 style:
                     const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),

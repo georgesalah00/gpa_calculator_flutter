@@ -13,3 +13,7 @@ extension Navigation on BuildContext {
 
       
 }
+
+extension ThemeModing on BuildContext{
+  Brightness themeMode(BuildContext context) => MediaQuery.of(context).platformBrightness;
+}
